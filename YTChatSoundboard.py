@@ -13,7 +13,7 @@ class YoutubeSoundBoard:
     def __init__(self) -> None:
         self.onCooldown = False
         self.timer = None
-        self.chat = pytchat.create(video_id=YOUR_VIDEO_ID)
+        #self.chat = pytchat.create(video_id=YOUR_VIDEO_ID)
 
     def summonSound(self, sound):
         '''Plays the sound from the sfx folder. Make sure the name of the sound is the same as the trigger.'''
@@ -23,7 +23,7 @@ class YoutubeSoundBoard:
             p = vlc.MediaPlayer("sfx/" + sound + EXTENSION)
             p.play()
         except Exception as e:
-            print("\nSound not found." + e + "\n")
+            print("\nSound not found."  + "\n")
             return
         
         self.onCooldown = True
@@ -38,13 +38,16 @@ class YoutubeSoundBoard:
         self.onCooldown = False
         chatMessage = chatMessage.lower()
 
-        if REQUIRE_PREFIX[0] and not chatMessage.startswith(REQUIRE_PREFIX[1]):
-            print("Message does not start with the trigger word. Ignoring...")
+        if REQUIRE_PREFIX[0] and chatMessage.startswith(REQUIRE_PREFIX[1]):
+            print("Prefix command found. Searching for sound...")
+            self.summonSound(chatMessage[len(REQUIRE_PREFIX[1]):])
             return
-        
-        print(chatMessage + " was sent. Searching for sound...")
-
-        self.summonSound(chatMessage)
+        elif REQUIRE_PREFIX[0] and not chatMessage.startswith(REQUIRE_PREFIX[1]):
+            print("Prefix command not found. Ignoring...")
+            return
+        else:
+            print(chatMessage + " was sent. Searching for sound...")
+            self.summonSound(chatMessage)
 
     def createSoundList(self):
         '''Optional: This creates a text file with all the current sound triggers. This is useful for the viewers to know what sounds they can trigger. 
@@ -63,7 +66,7 @@ class YoutubeSoundBoard:
 
 liveStream = YoutubeSoundBoard()
 
-# Comment this out if you don't want to create a sound list
+# Comment this out if you don't want to create a sound list file
 liveStream.createSoundList()
 
 # Loops until the stream is over or if something goes wrong
