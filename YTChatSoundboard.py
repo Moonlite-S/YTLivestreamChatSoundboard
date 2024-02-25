@@ -13,7 +13,7 @@ class YoutubeSoundBoard:
     def __init__(self) -> None:
         self.onCooldown = False
         self.timer = None
-        #self.chat = pytchat.create(video_id=YOUR_VIDEO_ID)
+        self.chat = pytchat.create(video_id=YOUR_VIDEO_ID)
 
     def summonSound(self, sound):
         '''Plays the sound from the sfx folder. Make sure the name of the sound is the same as the trigger.'''
