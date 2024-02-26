@@ -6,7 +6,8 @@ import threading
 
 YOUR_VIDEO_ID = ""  # Your stream id here as a string
 EXTENSION = ".mp3"  # File extension of the sound files
-COOLDOWN = 10       # Cooldown in seconds
+COOLDOWN = 30       # Cooldown in seconds
+VOLUME = 70         # Volume of the sound
 REQUIRE_PREFIX = (False, "")  # (Bool, "prefix") If true, the message must start with the prefix to trigger the sound. If false, the message must only contain the trigger word.
 
 class YoutubeSoundBoard:
@@ -18,19 +19,22 @@ class YoutubeSoundBoard:
     def summonSound(self, sound):
         '''Plays the sound from the sfx folder. Make sure the name of the sound is the same as the trigger.'''
         print("Playing sound " + sound + "...")
-        
-        try:
-            p = vlc.MediaPlayer("sfx/" + sound + EXTENSION)
-            p.play()
-        except Exception as e:
-            print("\nSound not found."  + "\n")
-            return
-        
-        self.onCooldown = True
-        self.timer = threading.Timer(COOLDOWN, self.__commandCooldown).start()
 
+        file = sound + EXTENSION
+
+        for filename in os.listdir("sfx"):
+            if filename == file:
+                p = vlc.MediaPlayer("sfx/" + file)
+                p.audio_set_volume(VOLUME)
+                p.play()
+                self.onCooldown = True
+                self.timer = threading.Timer(COOLDOWN, self.__commandCooldown).start()
+                return
+            
+        print("\nSound not found." + "\n")
+        
     def searchForSound(self, chatMessage):
-        '''Currently, the message needs to contain ONLY the trigger word.'''
+        '''The message needs to contain ONLY the trigger word (and the prefix if REQUIRE_PREFIX is True)'''
         if self.onCooldown:
             print("Can't accept inputs right now. Cooldown in effect. \n")
             return
@@ -57,8 +61,9 @@ class YoutubeSoundBoard:
         with open("soundList.txt", "w") as f:
             f.write("Possible sound commands:\n\n")
             for filename in os.listdir(sfxDir):
-                filename = filename[:-4]
-                f.write(filename + "\n")
+                if filename.endswith(EXTENSION):
+                    filename = filename[:-4]
+                    f.write(filename + "\n")
 
     def __commandCooldown(self):
         print("Accepting Inputs Again\n")
@@ -69,6 +74,7 @@ liveStream = YoutubeSoundBoard()
 # Comment this out if you don't want to create a sound list file
 liveStream.createSoundList()
 
+print("We are live! Waiting for chat messages...")
 # Loops until the stream is over or if something goes wrong
 while liveStream.chat.is_alive():
     for c in liveStream.chat.get().sync_items():
