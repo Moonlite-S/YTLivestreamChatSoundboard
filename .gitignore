@@ -1,3 +1,5 @@
 .vscode
 /sfx/*.mp3
-soundList.txt
+
+/server/.venv
+/server/soundList.txt

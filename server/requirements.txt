@@ -1,0 +1,2 @@
+python-vlc >=3.0
+pytchat >=0.5.5

@@ -10,19 +10,9 @@ Have your viewers type in a certain word in chat to play an audio file.
 
 ## Installation
 
-- Download dependencies first ([pytchat](https://github.com/taizan-hokuto/pytchat?tab=readme-ov-file) and [vlc](https://pypi.org/project/python-vlc/)).
+- Download dependencies [ pip install -r requirements.txt ]
 
-`pip install pytchat`
-
-`pip install python-vlc`
-
-- Download the Python file in releases or clone the repo at:
-
-`https://github.com/Moonlite-S/YTLivestreamChatSoundboard.git`
-
-- Ensure there is a 'sfx' folder. If there isn't one, create one. That is where you'll place all your audio files in. As you place your files, please keep the naming to just letters to ensure the files get read correctly. Files are *not* case sensitive. Keep file extensions consistent as well.
-
-- Replace the `YOUR_VIDEO_ID` with your stream ID when you start streaming.
+- Go to /server/config.py and replace the `YOUR_VIDEO_ID` with your stream ID when you start streaming.
 
 - Run the file and you're good to go!
 
