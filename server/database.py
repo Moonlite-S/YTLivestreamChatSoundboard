@@ -1,15 +1,25 @@
 import sqlite3
-import config
-import Users
 
-conn = sqlite3.connect("users.db")
+def createDatabase():
+    conn = sqlite3.connect("users.db")
 
-c = conn.cursor()
+    c = conn.cursor()
 
-# SCHEMA (users):
-#   name: string (Primary Key)
-# (Maybe add like an ID or rank?)
-c.execute("""CREATE TABLE IF NOT EXISTS users
-          id integer,
-          name string name,
-          PRIMARY KEY (id)""")
+    # SCHEMA (users):
+    #   user_id: integer (Primary Key)
+    #   name: string
+
+    # SCHEMA (backlog):
+    #   message_id: integer (Primary Key)
+    #   user_id: integer (Foriegn Key)
+    #   user: string
+    #   message: string
+    #   date: string
+
+    c.execute("""CREATE TABLE IF NOT EXISTS users
+            (user_id integer,
+            name string name,
+            PRIMARY KEY (user_id))""")
+
+    conn.commit()
+    conn.close()

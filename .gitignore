@@ -1,5 +1,6 @@
 .vscode
-/sfx/*.mp3
+users.db
+sfx/*.mp3
 
 /server/.venv
 /server/soundList.txt

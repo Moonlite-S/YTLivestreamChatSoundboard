@@ -1,7 +1,7 @@
 import os
 import config
 
-def createSoundList(self):
+def createSoundList():
     '''Optional: This creates a text file with all the current sound triggers. This is useful for the viewers to know what sounds they can trigger. 
     '''
     sfxDir = "sfx"
