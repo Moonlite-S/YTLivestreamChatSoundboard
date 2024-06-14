@@ -1,6 +1,8 @@
+__pycache__
+
 .vscode
 users.db
 sfx/*.mp3
+soundList.txt
 
-/server/.venv
-/server/soundList.txt
+.venv
