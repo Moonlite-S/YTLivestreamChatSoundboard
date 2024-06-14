@@ -1,7 +1,6 @@
 __pycache__
 
 .vscode
-users.db
 sfx/*.mp3
 soundList.txt
 
