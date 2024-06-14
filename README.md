@@ -10,7 +10,7 @@ Have your viewers type in a certain word in chat to play an audio file.
 
 ## Installation
 
-- Clone this repo
+- Clone this repo (https://github.com/Moonlite-S/YTLivestreamChatSoundboard.git)
 
 - Download dependencies  (pytchat and python-vlc) or [ pip install -r requirements.txt ]
 
