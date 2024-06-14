@@ -42,6 +42,7 @@ When you run the file, it creates a txt file in the same directory that lists al
 
 6/14/2024
 > Revamped mostly everything (mainly just separated things)
+> 
 > Sound cooldowns are now user dependent instead of global (so each user has a cooldown like it was supposed to)
 
 2/26/2024
